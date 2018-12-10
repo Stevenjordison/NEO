@@ -1,0 +1,73 @@
+$themeColor: #c7cce6;
+$main_color: #61688a;
+$main_bg: #262a42;
+$border_color: #4e5b85;
+$border_color_hover: #7a98f7;
+$btn_bg: #7a98f7;
+$btn_bg_hover: #a0b6f9;
+$btn_bg_disabled: #4e5b85;
+$green: #589065;
+$red: #ae4e54;
+$wrap_bg: #181b2a;
+$main_padding: 10px;
+$line_color: #1f2943;
+$td_hover: #303d65;
+
+$light_themeColor: #232a4a;
+$light_hover: #409EFF;
+$light_border_color: #d1d3df;
+$light_sub_color: #9194a4;
+$light_td_hover: #e7edff;
+
+@mixin sl() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin slh($line) {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: block-axis;
+    word-break: break-all;
+}
+
+@mixin themeChange() {
+    transition: color,background .6s ease-out;
+}
+
+// ------------------------------------------------------------------------ extend ------------------------------------------------------------------------
+%btn-config {
+    display: inline-block;
+    height: 28px;
+    line-height: 26px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+%btn_default {
+    @extend %btn-config;
+    border: 1px solid $main_color;
+    color: $themeColor;
+    transition: all .3s;
+    background-color: initial;
+    &:hover {
+        background-color: $main_color;
+    }
+}
+
+%btn_fill {
+    @extend %btn-config;
+    border: 1px solid $main_color;
+    color: #fff;
+    transition: all .3s;
+    background-color: $btn_bg;
+    &:hover {
+        background-color: $btn_bg_hover;
+    }
+}

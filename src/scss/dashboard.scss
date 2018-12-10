@@ -1,0 +1,124 @@
+#dashboard-page {
+    @import 'common/mixin.scss';
+    padding: $main_padding;
+    background: url('../assets/images/bg.jpg') 0 0/cover no-repeat;
+    $color_gray: #aaa;
+    @font-face {
+        font-family: 'DIN-Medium';
+        src: url("../assets/fonts/DIN-Medium.otf");
+    }
+
+    height: 100%;
+    > div {
+        height: 100%;
+    }
+    > div > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .small {
+        flex: 0 0 132px;
+    }
+    .section-wrap {
+        width: 100%;
+        overflow: hidden;
+        .title {
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 24px;
+            background-color: #1b1e2e;
+            :before {
+                position: absolute;
+                left: 16px;
+                top: 10px;
+                content: '';
+                width: 3px;
+                height: 20px;
+                background: linear-gradient(#4e83ff 0%, #44ebf5 100%);
+            }
+            h1 {
+                display: inline-block;
+                color: $themeColor;
+                font-size: 18px;
+                vertical-align: baseline;
+            }
+            span {
+                color: $color_gray;
+                font-size: 12px;
+            }
+        }
+
+        .content {
+            p {
+                font-family: 'DIN-Medium';
+                font-size: 40px;
+                color: #c7cce6;
+                text-align: center;
+            }
+        }
+    }
+    .section-wrap.small .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100px;
+        padding: 20px 8%;
+    }
+
+    .section-wrap.reward .content {
+        height: 300px;
+    }
+
+    ul.content {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 20px;
+        li {
+            flex: 1;
+        }
+    }
+
+    .comment .el-table .el-table__body .club-name {
+        font-size: 13px;
+    }
+
+    .label-progress {
+        display: flex;
+        width: 100%;
+        margin-bottom: 12px;
+        label {
+            flex: 0 0 40px;
+        }
+        .progress {
+            flex: 1;
+        }
+    }
+
+    .el-table {
+        .thead {
+            color: #000;
+            background-color: #f2f6f9;
+        }
+        td, th {
+            padding: 5px 0;
+        }
+    }
+
+    .auto-flex {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        > header.title {
+            flex: 0 0 32px;
+        }
+        .content {
+            flex: 1;
+        }
+    }
+    .mb {
+        margin-bottom: 12px;
+    }
+}

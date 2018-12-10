@@ -1,0 +1,80 @@
+@charset "utf-8";
+@import 'normalize';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body [class*=" el-icon-lx"], body [class^=el-icon-lx] {
+    font-family:"lx-iconfont" !important;
+    font-size: inherit;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: inherit;
+}
+
+html, body, #app, .wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+a {
+    text-decoration: none
+}
+
+.clear-fix{
+    clear: both;
+}
+
+.content-box {
+    -webkit-transition: left .3s ease-in-out;
+    transition: left .3s ease-in-out;
+    background: #f0f0f0;
+}
+
+.content {
+    width: auto;
+    height: 100%;
+    padding: 10px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.content-collapse {
+    left: 65px;
+}
+
+.container {
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.page-header{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 12px;
+    h1{
+        font-size: 24px;
+        color: #000;
+        font-weight: bold;
+    }
+    .el-button-group{
+        position: absolute;
+        right: 12px;
+        top: 4px;
+    }
+}
