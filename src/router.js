@@ -5,7 +5,7 @@ Vue.use(Router)
 
 let routes = [
     { // 大盘
-        path: '/dashboard', name: 'dashboard', meta: {ok: true}, component (resolve) { require(['./page/Dashboard.vue'], resolve) }
+        path: '/', name: 'dashboard', component (resolve) { require(['./page/Dashboard.vue'], resolve) }
     }
 ]
 

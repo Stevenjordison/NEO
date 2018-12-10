@@ -20,16 +20,7 @@ router.beforeEach((to, from, next) => {
         query: to.query,
         instance: router
     })
-    const token = store.state.token
-    const rolePermissions = store.state.rolePermissions
-    if (!token && to.path !== '/login') {
-        next('/login')
-    } else if (to.meta.permission) {
-        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-        rolePermissions === 1 ? next() : next('/403')
-    } else {
-        next()
-    }
+    next()
 })
 
 new Vue({

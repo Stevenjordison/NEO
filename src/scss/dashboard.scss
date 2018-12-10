@@ -1,5 +1,8 @@
 #dashboard-page {
     @import 'common/mixin.scss';
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: $main_padding;
     background: url('../assets/images/bg.jpg') 0 0/cover no-repeat;
     $color_gray: #aaa;
@@ -8,19 +11,17 @@
         src: url("../assets/fonts/DIN-Medium.otf");
     }
 
-    height: 100%;
-    > div {
-        height: 100%;
-    }
-    > div > div {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
+    >.main{
+        flex: 1;
     }
 
-    .small {
-        flex: 0 0 132px;
+    > footer{
+        flex: 0 0 250px;
+        .section-wrap{
+            height: 100%;
+        }
     }
+
     .section-wrap {
         width: 100%;
         overflow: hidden;
@@ -60,17 +61,6 @@
             }
         }
     }
-    .section-wrap.small .content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        height: 100px;
-        padding: 20px 8%;
-    }
-
-    .section-wrap.reward .content {
-        height: 300px;
-    }
 
     ul.content {
         display: flex;
@@ -97,27 +87,6 @@
         }
     }
 
-    .el-table {
-        .thead {
-            color: #000;
-            background-color: #f2f6f9;
-        }
-        td, th {
-            padding: 5px 0;
-        }
-    }
-
-    .auto-flex {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        > header.title {
-            flex: 0 0 32px;
-        }
-        .content {
-            flex: 1;
-        }
-    }
     .mb {
         margin-bottom: 12px;
     }
