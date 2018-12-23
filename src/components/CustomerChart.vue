@@ -1,26 +1,28 @@
 <template>
     <ul>
         <li><ChartPie :data="customerData.gender" title="性别"></ChartPie></li>
-        <li><ChartPie :data="customerData.agebin" title="年龄"></ChartPie></li>
+        <li><ChartPie :data="customerData.agebin" :color="colorMap.blue" title="年龄"></ChartPie></li>
         <li><ChartPie :data="customerData.income" title="收入"></ChartPie></li>
-        <li><ChartPie :data="customerData.segment" title="用户偏好"></ChartPie></li>
+        <li><ChartWorlCloud :data="customerData.segment" :color="colorMap.rainbow" title="用户偏好"></ChartWorlCloud></li>
     </ul>
 </template>
 
 <script>
     import ChartPie from './ChartPie'
-    import {customerData} from '../script/helper'
+    import ChartWorlCloud from './ChartWorlCloud'
+    import {customerData, colorMap} from '../script/helper'
 
     export default {
         name: 'CustomerChart',
         data () {
             return {
                 chart: null,
-                customerData: customerData
+                customerData: customerData,
+                colorMap: colorMap
             }
         },
         components: {
-            ChartPie
+            ChartPie,ChartWorlCloud
         },
         mounted() {
             console.log(this.customerData)

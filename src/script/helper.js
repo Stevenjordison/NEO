@@ -1,6 +1,7 @@
 export {
     debounce,
-    customerData
+    customerData,
+    colorMap
 }
 
 const customerData = {
@@ -137,6 +138,10 @@ const customerData = {
     },
     'car': {'title': '\u8f66\u4ea7', 'datas': [{'key': '\u65e0', 'value': 0.71181998298688}, {'key': '\u6709', 'value': 0.28818001701312}]},
     'agebin': {'title': '\u5e74\u9f84', 'datas': [{'key': '45\u5c81\u4ee5\u4e0a', 'value': 0.074777254565841}, {'key': '35-44\u5c81', 'value': 0.32326222683096}, {'key': '25-34\u5c81', 'value': 0.43811410434383}, {'key': '18-24\u5c81', 'value': 0.14031825986885}, {'key': '18\u5c81\u4ee5\u4e0b', 'value': 0.023528154390519}]}
+}
+const colorMap = {
+    blue: ['#0fdbe0', '#15abbe', '#0f8891', '#145866', '#093138'],
+    rainbow:['#5b9bef', '#74a9f8', '#7fd0f8', '#87e6f0', '#8efbb3', '#8cfb82', '#d4fb81', '#fdfd55']
 }
 
 function debounce (func, wait, immediate) {

@@ -17,25 +17,22 @@
             }
         },
         mounted () {
-            console.log(this.data)
             this.chart = echarts.init(this.$refs.chart)
             this.chart.showLoading()
             this.initChart()
         },
         props: {
             title: String,
-            data: Object, Array
+            data: Object, Array,
+            color: Array
         },
         methods: {
             initChart () {
                 const that = this
-                // let total = data.map((item) => item.successAmount)
-
                 this.chart.hideLoading()
 
                 this.chart.setOption({
-                    backgroundColor: '#2c343c',
-
+                    color: that.color,
                     title: {
                         text: that.title,
                         left: 'center',

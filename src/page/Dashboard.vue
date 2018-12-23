@@ -8,13 +8,31 @@
         <el-row class="main" :gutter="12">
             <!--left-->
             <el-col :span="6">
-                <!--本月签约情况-->
-                <section class="section-wrap small mb">
+                <!--客户分析-->
+                <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
-                        <h1>本月签约情况</h1>
-                        <span>(家)</span>
+                        <h1>客户分析</h1>
                     </header>
                     <div class="content">
+                        <ChartSexPie :data="customerData" :color="colorMap.rainbow"></ChartSexPie>
+                    </div>
+                </section>
+                <!--客户分析-->
+                <section class="section-wrap mb" style="flex: 1">
+                    <header class="title">
+                        <h1>客户分析</h1>
+                    </header>
+                    <div class="content">
+                        <ChartPie :data="customerData.gender" :color="colorMap.rainbow"></ChartPie>
+                    </div>
+                </section>
+                <!--客户分析-->
+                <section class="section-wrap" style="flex: 1">
+                    <header class="title">
+                        <h1>客户分析</h1>
+                    </header>
+                    <div class="content">
+                        <ChartPie :data="customerData.gender" :color="colorMap.rainbow"></ChartPie>
                     </div>
                 </section>
             </el-col>
@@ -74,50 +92,36 @@
                 </section>
             </el-col>
         </el-row>
-        <footer class="customer">
-            <section class="section-wrap">
-                <header class="title">
-                    <h1>用户画像</h1>
-                </header>
-                <div class="content">
-                    <CustomerChart></CustomerChart>
-                </div>
-            </section>
-        </footer>
+        <!--<footer class="customer">-->
+            <!--<section class="section-wrap">-->
+                <!--<header class="title">-->
+                    <!--<h1>用户画像</h1>-->
+                <!--</header>-->
+                <!--<div class="content">-->
+                    <!--<CustomerChart></CustomerChart>-->
+                <!--</div>-->
+            <!--</section>-->
+        <!--</footer>-->
     </div>
 </template>
 
 <script>
     import CustomerChart from '../components/CustomerChart'
+    import ChartPie from '../components/ChartPie'
+    import ChartSexPie from '../components/ChartSexPie'
+    import {customerData, colorMap} from '../script/helper'
 
     export default {
         name: 'dashboard',
         data () {
             return {
-                region: null,
-                totalSigningCount: 0,
-                totalSigningQuota: 0,
-                signingList: [],
-                payment: {
-                    yesterdayAmount: 0,
-                    yesterdayTotal: 0,
-                    todayAmount: 0,
-                    todayTotal: 0,
-                    monthAmount: 0,
-                    monthTotal: 0,
-                    paymentQuota: 0
-                },
-                personSigningList: [],
-                paymentList: [],
-                rewardList: [],
-                payChartList: [],
-                commentList: [],
-
+                customerData: customerData,
+                colorMap: colorMap,
                 leftHeight: null
             }
         },
         components: {
-            CustomerChart
+            ChartSexPie, CustomerChart, ChartPie
         },
         methods: {
             setChart (id, data) {
