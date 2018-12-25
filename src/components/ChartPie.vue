@@ -23,25 +23,15 @@
         },
         props: {
             title: String,
-            data: Object, Array,
+            data: Array,
             color: Array
         },
         methods: {
             initChart () {
                 const that = this
                 this.chart.hideLoading()
-
                 this.chart.setOption({
                     color: that.color,
-                    title: {
-                        text: that.title,
-                        left: 'center',
-                        top: 20,
-                        textStyle: {
-                            color: '#ccc'
-                        }
-                    },
-
                     tooltip: {
                         trigger: 'item',
                         formatter: '{a} <br/>{b} : {d}%'
@@ -59,9 +49,9 @@
                         {
                             name: that.title,
                             type: 'pie',
-                            radius: '55%',
+                            radius: ['40%', '60%'],
                             center: ['50%', '50%'],
-                            data: that.data.datas.map((item) => {
+                            data: that.data.map((item) => {
                                 return {name: item.key, value: item.value.toFixed(2)}
                             }),
                             label: {

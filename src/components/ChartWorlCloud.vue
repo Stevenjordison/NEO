@@ -19,28 +19,17 @@
             this.initChart()
         },
         props: {
-            title: String,
-            data: Object, Array,
-            color: Array
+            data: Array
         },
         methods: {
             initChart () {
                 const that = this
                 this.chart.hideLoading()
 
-                let data = that.data.datas.sort((a,b) => {return (b.value - a.value)}).map((item) => {
+                let data = that.data.sort((a,b) => {return (b.value - a.value)}).map((item) => {
                     return {name: item.key, value: (item.value*100).toFixed(2)}
                 })
                 this.chart.setOption({
-                    // title: {
-                    //     text: that.title,
-                    //     left: 'center',
-                    //     top: 20,
-                    //     textStyle: {
-                    //         color: '#ccc'
-                    //     }
-                    // },
-
                     tooltip: {
                         trigger: 'item',
                         formatter: '{b} : {c}%'
@@ -82,7 +71,6 @@
                         }
                     ]
                 })
-                console.log(this.chart.echartsInstance)
             }
         }
     }

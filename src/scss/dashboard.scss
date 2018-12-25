@@ -62,15 +62,43 @@
 
         .content {
             flex: 1;
-            p {
+            .num {
                 font-family: 'DIN-Medium';
-                font-size: 40px;
+                font-size: 34px;
                 color: #c7cce6;
                 text-align: center;
             }
         }
     }
 
+    .middle{
+        .middle-title{
+            flex: 0 0 230px;
+            margin-bottom: 12px;
+            > div{
+                height: 100%;
+                > .section-wrap{
+                    height: 100%;
+                    .content{
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        .middle-content{
+            flex: 1;
+            margin-bottom: 12px;
+        }
+        .middle-footer{
+            flex: 0 0 233px;
+            > div{
+                height: 100%;
+                > .section-wrap{
+                    height: 100%;
+                }
+            }
+        }
+    }
     ul.content {
         display: flex;
         flex-direction: column;
