@@ -5,6 +5,7 @@
 <script>
     import echarts from 'echarts/lib/echarts'
     import 'echarts-liquidfill'
+    import 'echarts/lib/component/title'
 
     export default {
         name: 'ChartLiquid',
@@ -15,11 +16,16 @@
         },
         mounted () {
             this.chart = echarts.init(this.$refs.chart)
-            this.chart.showLoading()
+            this.chart.showLoading({
+                text: '加载中...',
+                color: '#0ff',
+                maskColor: 'rgba(255, 255, 255, 0)'
+            })
             this.initChart()
         },
         props: {
-            color: Array
+            color: Array,
+            data: Number
         },
         methods: {
             initChart () {
@@ -27,10 +33,11 @@
                 this.chart.hideLoading()
 
                 this.chart.setOption({
+                    // title: '日环比',
                     series: [{
                         type: 'liquidFill',
                         //data: [0.6, 0.5, 0.4, 0.3],
-                        data: [0.54, 0.5, 0.4, 0.3],
+                        data: that.handleData(that.data),
                         radius: '90%',
                         // 水球颜色
                         color: that.color,
@@ -46,21 +53,25 @@
                         },
                         label: {
                             normal: {
-                                // textStyle: {
-                                color: 'red',
+                                color: '#f66',
                                 insideColor: 'yellow',
                                 fontSize: 30
-                                // }
                             }
                         },
                         // 内图 背景色 边
                         backgroundStyle: {
                             color: 'rgba(4,24,74,0.8)'
-                            // borderWidth: 5,
-                            // borderColor: 'red',
                         }
                     }]
                 })
+            },
+            handleData (num) {
+                const data = []
+                for (let i = 1; i < 5; i++) {
+                    let result = (num * (i / 4) / 100).toFixed(2)
+                    data.push(result)
+                }
+                return data.reverse()
             }
         }
     }

@@ -5,8 +5,10 @@ import store from './store/index'
 Vue.use(Router)
 
 let routes = [
-    { // 大盘
-        path: '/', name: 'dashboard', component (resolve) { require(['./page/Dashboard.vue'], resolve) }
+    {
+        path: '/', name: 'home', component (resolve) { require(['./page/Home.vue'], resolve) }
+    }, {
+        path: '/dashboard', name: 'dashboard', component (resolve) { require(['./page/Dashboard.vue'], resolve) }
     }
 ]
 

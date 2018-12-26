@@ -15,14 +15,24 @@
         },
         mounted () {
             this.chart = echarts.init(this.$refs.chart)
-            this.chart.showLoading()
-            this.initChart()
+            this.chart.showLoading({
+                text: '加载中...',
+                color: '#0ff',
+                textColor: '#fff',
+                maskColor: 'rgba(255, 255, 255, 0)',
+            })
         },
         props: {
             data: Array
         },
+        watch: {
+            data() {
+                this.initChart()
+            }
+        },
         methods: {
             initChart () {
+                console.log(1)
                 const that = this
                 this.chart.hideLoading()
 
@@ -33,15 +43,6 @@
                     tooltip: {
                         trigger: 'item',
                         formatter: '{b} : {c}%'
-                    },
-
-                    visualMap: {
-                        show: false,
-                        min: 80,
-                        max: 600,
-                        inRange: {
-                            colorLightness: [0, 1]
-                        }
                     },
                     series: [
                         {

@@ -3,8 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-// const url = 'http://192.168.0.10:8081/xmd-pay/' // 伟强
-const url = 'http://sdcm100:8081/xmd-pay/' // 105
+const url = 'http://192.168.5.169:8080/' // 伟强
 
 module.exports = {
   dev: {
@@ -12,16 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
-          target: `${url}api`,
+      '/bigdata':{
+          target: `${url}bigdata`,
           changeOrigin:true,
           pathRewrite:{
-              '^/api':''
+              '^/bigdata':''
           }
-      },
-      '/ms':{
-          target: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
-          changeOrigin: true
       }
     },
     // Various Dev Server settings

@@ -5,13 +5,12 @@
     height: 100%;
     padding: $main_padding;
     background: url('../assets/images/bg.jpg') 0 0/cover no-repeat;
-    $color_gray: #aaa;
     @font-face {
         font-family: 'DIN-Medium';
         src: url("../assets/fonts/DIN-Medium.otf");
     }
 
-    >.main{
+    >.container{
         flex: 1;
         > div{
             height: 100%;

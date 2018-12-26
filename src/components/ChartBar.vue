@@ -18,13 +18,22 @@
         },
         mounted () {
             this.chart = echarts.init(this.$refs.chart)
-            this.chart.showLoading()
-            this.initChart()
+            this.chart.showLoading({
+                text: '加载中...',
+                color: '#0ff',
+                textColor: '#fff',
+                maskColor: 'rgba(255, 255, 255, 0)',
+            })
         },
         props: {
             title: String,
             data: Array,
             color: Array
+        },
+        watch: {
+            data() {
+                this.initChart()
+            }
         },
         methods: {
             initChart () {

@@ -6,6 +6,7 @@
     import echarts from 'echarts/lib/echarts'
     import 'echarts/lib/chart/pie'
     import 'echarts/lib/component/title'
+    import 'echarts/lib/component/visualMap'
     import 'echarts/lib/component/legend'
     import 'echarts/lib/component/tooltip'
 
@@ -18,32 +19,33 @@
         },
         mounted () {
             this.chart = echarts.init(this.$refs.chart)
-            this.chart.showLoading()
-            this.initChart()
+            this.chart.showLoading({
+                text: '加载中...',
+                color: '#0ff',
+                textColor: '#fff',
+                maskColor: 'rgba(255, 255, 255, 0)',
+            })
+        },
+        watch: {
+            data() {
+                this.initChart()
+            }
         },
         props: {
             title: String,
             data: Array,
-            color: Array
+            color: Array,
+            interval: Number
         },
         methods: {
             initChart () {
                 const that = this
-                this.chart.hideLoading()
-                this.chart.setOption({
+                that.chart.hideLoading()
+                that.chart.setOption({
                     color: that.color,
                     tooltip: {
                         trigger: 'item',
                         formatter: '{a} <br/>{b} : {d}%'
-                    },
-
-                    visualMap: {
-                        show: false,
-                        min: 80,
-                        max: 600,
-                        inRange: {
-                            colorLightness: [0, 1]
-                        }
                     },
                     series: [
                         {
@@ -65,6 +67,24 @@
                         }
                     ]
                 })
+                let app = {};
+                app.currentIndex = -1;
+                setInterval(function () {
+                    let dataLen = that.data.length;
+                    // 取消之前高亮的图形
+                    that.chart.dispatchAction({
+                        type: 'downplay',
+                        seriesIndex: 0,
+                        dataIndex: app.currentIndex
+                    });
+                    app.currentIndex = (app.currentIndex + 1) % dataLen;
+                    // 高亮当前图形
+                    that.chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: app.currentIndex
+                    });
+                }, that.interval);
             }
         }
     }

@@ -5,7 +5,7 @@
             <div class="item" ref="avatar2">23</div>
         </div>
         <div class="right">
-            <ChartPie :data="data.agebin.datas" :color="color" title="年龄"></ChartPie>
+            <ChartPie :data="agebin" :color="color" title="年龄" :interval=1200></ChartPie>
         </div>
     </div>
 </template>
@@ -52,10 +52,15 @@
         mounted () {
             this.avatar1 = echarts.init(this.$refs.avatar1)
             this.avatar2 = echarts.init(this.$refs.avatar2)
-            this.initChart()
+        },
+        watch: {
+            agebin() {
+                this.initChart()
+            }
         },
         props: {
-            data: Object, Array,
+            gender: Array,
+            agebin: Array,
             color: Array
         },
         methods: {
@@ -66,7 +71,7 @@
             },
             optionChart1(){
                 const that = this
-                let data = that.data.gender.datas[0]
+                let data = that.gender[0]
                 let ratio=(data.value*100).toFixed(2);
 
                 return {
@@ -111,9 +116,9 @@
                     ]
                 }
             },
-            optionChart2(sex){
+            optionChart2(){
                 const that = this
-                let data = that.data.gender.datas[1]
+                let data = that.gender[1]
                 let ratio=(data.value*100).toFixed(2);
 
                 return {
