@@ -10,7 +10,7 @@
         name: 'ChartWordCloud',
         data () {
             return {
-                chart: null
+                chart: null,
             }
         },
         mounted () {
@@ -21,6 +21,7 @@
                 textColor: '#fff',
                 maskColor: 'rgba(255, 255, 255, 0)',
             })
+            this.initChart()
         },
         props: {
             data: Array
@@ -32,11 +33,10 @@
         },
         methods: {
             initChart () {
-                console.log(1)
                 const that = this
                 this.chart.hideLoading()
 
-                let data = that.data.sort((a,b) => {return (b.value - a.value)}).map((item) => {
+                let data = that.data.map((item) => {
                     return {name: item.key, value: (item.value*100).toFixed(2)}
                 })
                 this.chart.setOption({

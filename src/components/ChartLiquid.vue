@@ -27,13 +27,26 @@
             color: Array,
             data: Number
         },
+        watch: {
+            data() {
+                this.initChart()
+            }
+        },
         methods: {
             initChart () {
                 const that = this
                 this.chart.hideLoading()
 
                 this.chart.setOption({
-                    // title: '日环比',
+                    title: {
+                        text: '日环比:',
+                        textStyle: {
+                            width: '100%',
+                            color: '#fff',
+                            align: 'center',
+                            fontSize: 14
+                        }
+                    },
                     series: [{
                         type: 'liquidFill',
                         //data: [0.6, 0.5, 0.4, 0.3],
@@ -55,7 +68,8 @@
                             normal: {
                                 color: '#f66',
                                 insideColor: 'yellow',
-                                fontSize: 30
+                                fontSize: 30,
+                                fontFamily: 'DIN-Medium'
                             }
                         },
                         // 内图 背景色 边

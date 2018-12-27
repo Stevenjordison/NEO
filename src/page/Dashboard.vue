@@ -41,7 +41,7 @@
                         <h1>职业分布</h1>
                     </header>
                     <div class="content">
-                        <ChartWorlCloud :data="occupation"></ChartWorlCloud>
+                        <ChartWordCloud :data="occupation"></ChartWordCloud>
                     </div>
                 </section>
             </el-col>
@@ -55,8 +55,8 @@
                                 <h1>楼内客流</h1>
                             </header>
                             <div class="content">
-                                <p class="num" style="color: #9d67f9;">{{indoor}}</p>
-                                <ChartLiquid :data="13.4" :color="['#9d67f9', '#9259f5', '#b085fb']"></ChartLiquid>
+                                <p class="num" style="color: #9d67f9;">{{customer.indoor}}</p>
+                                <ChartLiquid :data="customerRose.indoor" :color="['#9d67f9', '#9259f5', '#b085fb']"></ChartLiquid>
                             </div>
                         </section>
                     </el-col>
@@ -66,8 +66,8 @@
                                 <h1>楼外客流</h1>
                             </header>
                             <div class="content">
-                                <p class="num" style="color: #ff9cc0">{{outdoor }}</p>
-                                <ChartLiquid :data="33.4" :color="['#ff9cc0', '#fb74a5', '#ffc3d8']"></ChartLiquid>
+                                <p class="num" style="color: #ff9cc0">{{customer.outdoor }}</p>
+                                <ChartLiquid :data="customerRose.outdoor" :color="['#ff9cc0', '#fb74a5', '#ffc3d8']"></ChartLiquid>
                             </div>
                         </section>
                     </el-col>
@@ -78,7 +78,7 @@
                             </header>
                             <div class="content">
                                 <p class="num" style="color: #35ebd3">{{customer.new}}</p>
-                                <ChartLiquid :data="-53.4" :color="['#35ebd3', '#1eead0', '#5af5e1']"></ChartLiquid>
+                                <ChartLiquid :data="customerRose.new" :color="['#35ebd3', '#1eead0', '#5af5e1']"></ChartLiquid>
                             </div>
                         </section>
                     </el-col>
@@ -152,7 +152,7 @@
                         <h1>人群偏好</h1>
                     </header>
                     <div class="content">
-                        <ChartWorlCloud :data="segment"></ChartWorlCloud>
+                        <ChartWordCloud :data="segment"></ChartWordCloud>
                     </div>
                 </section>
             </el-col>
@@ -161,115 +161,50 @@
 </template>
 
 <script>
-    import DATE from '../script/date'
+    import { mapState } from 'vuex'
     import CustomerChart from '../components/CustomerChart'
     import ChartPie from '../components/ChartPie'
     import ChartSexPie from '../components/ChartSexPie'
     import ChartDoubleLine from '../components/ChartDoubleLine'
     import ChartBar from '../components/ChartBar'
-    import ChartWorlCloud from '../components/ChartWorlCloud'
+    import ChartWordCloud from '../components/ChartWordCloud'
     import ChartLiquid from '../components/ChartLiquid'
     import ChartBarHorizontal from '../components/ChartBarHorizontal'
     import ChartMap from '../components/ChartMap'
-    import { customerData, customerData2, colorMap } from '../script/helper'
+    import { colorMap } from '../script/helper'
 
     export default {
         name: 'dashboard',
         data () {
             return {
-                today: DATE.showToDay(),
-                yesterday: DATE.showAgoDay(1).start,
-                customerData: customerData,
-                customerData2: customerData2,
-                customer: {
-                    new:0,
-                    old:0
-                },
+                colorMap: colorMap
+            }
+        },
+        computed: {
+            ...mapState({
+                customer: state => state.customer,
+                customerRose: state => state.customerRose,
+
                 // flowData
-                indoor: 0,
-                outdoor: 0,
-                periodIn: [],
-                period: [],
-                newOld: [],
-                remainTime: [],
+                periodIn: state => state.periodIn,
+                period: state => state.period,
+                newOld: state => state.newOld,
+                remainTime: state => state.remainTime,
 
                 // portraitData: null,
-                edu: [],
-                kids: [],
-                occupation: [],
-                agebin: [],
-                gender: [],
-                segment: [], // 人群偏好
-                cellFactory: [], // 手机品牌
+                edu: state => state.edu,
+                kids: state => state.kids,
+                occupation: state => state.occupation,
+                agebin: state => state.agebin,
+                gender: state => state.gender,
+                segment: state => state.segment,
+                cellFactory: state => state.cellFactory,
 
-                colorMap: colorMap,
-                mapData: [],
-
-            }
+                mapData: state => state.mapData
+            })
         },
         components: {
-            ChartSexPie, CustomerChart, ChartMap, ChartPie, ChartBar, ChartDoubleLine, ChartWorlCloud, ChartBarHorizontal, ChartLiquid
-        },
-        created() {
-            setTimeout(() => {
-                this.cellFactory = customerData.cell_factory.datas.splice(0, 10)
-            }, 3000)
-            this.queryData()
-        },
-        methods: {
-            queryData () {
-                const that = this
-                that.$axios({
-                    url: 'bigdata/flow',
-                    params: {
-                        startDate: '2018-12-25',
-                        endDate: '2018-12-25'
-                    }
-                }).then(res => {
-                    let flowData = res
-                    that.indoor = flowData.indoor
-                    that.outdoor = flowData.outdoor
-                    that.periodIn = flowData.periodIn
-                    that.period = flowData.period
-                    that.newOld = flowData.newold.data
-                    that.remainTime = flowData.remainTime.data
-
-                    res.newold.data.forEach(item => {
-                        item.name === '新顾客' && (that.customer.new = item.value)
-                        item.name === '老顾客' && (that.customer.old = item.value)
-                    })
-                    console.log(res)
-                })
-
-                that.$axios({
-                    url: 'bigdata/portrait',
-                    params: {
-                        startDate: '2018-12-25',
-                        endDate: '2018-12-25'
-                    }
-                }).then(res => {
-                    let portraitData = res
-                    that.edu = portraitData.edu.datas
-                    that.kids = portraitData.kids.datas
-                    that.occupation = portraitData.occupation.datas
-                    that.gender = portraitData.gender.datas
-                    that.agebin = portraitData.agebin.datas
-                    that.segment = portraitData.segment.datas
-                    that.cellFactory = portraitData.cell_factory.datas
-
-                    console.log(res)
-                })
-                that.$axios({
-                    url: 'bigdata/location/name',
-                    params: {
-                        startDate: '2018-12-25',
-                        endDate: '2018-12-25'
-                    }
-                }).then(res => {
-                    that.mapData = res
-                    console.log(res)
-                })
-            }
+            ChartSexPie, CustomerChart, ChartMap, ChartPie, ChartBar, ChartDoubleLine, ChartWordCloud, ChartBarHorizontal, ChartLiquid
         }
     }
 </script>

@@ -10,6 +10,11 @@
 
 <script>
     export default {
-        name: 'app'
+        name: 'app',
+        mounted() {
+            setTimeout(() => {
+                this.$store.dispatch('queryBigData')
+            }, 1000)
+        }
     }
 </script>

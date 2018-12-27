@@ -9,7 +9,7 @@
 
 <script>
     import ChartPie from './ChartPie'
-    import ChartWorlCloud from './ChartWorlCloud'
+    import ChartWorlCloud from './ChartWordCloud'
     import {customerData, colorMap} from '../script/helper'
 
     export default {

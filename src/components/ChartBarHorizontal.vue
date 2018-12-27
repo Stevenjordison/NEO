@@ -22,6 +22,11 @@
         props: {
             data: Array
         },
+        watch: {
+            data() {
+                this.initChart()
+            }
+        },
         methods: {
             initChart () {
                 const that = this

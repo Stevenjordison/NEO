@@ -25,6 +25,7 @@
                 textColor: '#fff',
                 maskColor: 'rgba(255, 255, 255, 0)',
             })
+            this.initChart()
         },
         watch: {
             data() {

@@ -138,15 +138,11 @@
                 textColor: '#fff',
                 maskColor: 'rgba(255, 255, 255, 0)',
             })
+            this.dealData()
+            this.initChart()
         },
         props: {
             data: Array
-        },
-        watch: {
-            data() {
-                this.dealData()
-                this.initChart()
-            }
         },
         methods: {
             initChart () {

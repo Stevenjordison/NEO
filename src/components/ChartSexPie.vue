@@ -52,6 +52,7 @@
         mounted () {
             this.avatar1 = echarts.init(this.$refs.avatar1)
             this.avatar2 = echarts.init(this.$refs.avatar2)
+            this.initChart()
         },
         watch: {
             agebin() {
@@ -66,6 +67,7 @@
         methods: {
             initChart () {
                 const that = this
+                if (!that.gender[0]) return
                 this.avatar1.setOption(that.optionChart1())
                 this.avatar2.setOption(that.optionChart2())
             },
@@ -176,13 +178,13 @@
             height: 100%;
         }
         .left{
-            width: 20%;
+            width: 25%;
             .item{
                 height: 50%;
             }
         }
         .right{
-            width: 80%;
+            width: 75%;
         }
     }
 </style>
