@@ -118,7 +118,7 @@
                         {
                             name: '停车位',
                             type: 'gauge',
-                            center: ['25%', '50%'],
+                            center: ['25%', '40%'],
                             radius: '40%',
                             min: 0,
                             max: that.data[1].total,
@@ -189,7 +189,7 @@
                         {
                             name: '停车位',
                             type: 'gauge',
-                            center: ['75%', '50%'],
+                            center: ['75%', '40%'],
                             radius: '40%',
                             min: 0,
                             max: that.data[2].total,

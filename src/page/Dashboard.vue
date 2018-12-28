@@ -86,10 +86,10 @@
 
                 <section class="section-wrap middle-content">
                     <header class="title">
-                        <h1>客源分析</h1>
+                        <h1>常驻地区</h1>
                     </header>
                     <div class="content">
-                        <ChartMap :data="mapData"></ChartMap>
+                        <ChartHotMap :data="mapData"></ChartHotMap>
                     </div>
                 </section>
 
@@ -125,13 +125,13 @@
                         <h1>新老客户分析</h1>
                     </header>
                     <div class="content">
-                        <ChartPie :data="newOld" :color="['#06ff02', '#ff5152']" :interval=1200></ChartPie>
+                        <ChartPie :data="newOld" :color="['#00ffff', '#006ced']" :interval=1200></ChartPie>
                     </div>
                 </section>
                 <!--店内停留时间占比-->
                 <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
-                        <h1>店内停留时间占比</h1>
+                        <h1>楼内停留时间占比</h1>
                     </header>
                     <div class="content">
                         <ChartPie :data="remainTime" :color="colorMap.pie1" :interval=1200></ChartPie>
@@ -140,7 +140,7 @@
                 <!--店内停留时间占比-->
                 <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
-                        <h1>应用分析</h1>
+                        <h1>设备品牌</h1>
                     </header>
                     <div class="content">
                         <ChartPie :data="cellFactory" :color="colorMap.rainbow" :interval=1200></ChartPie>
@@ -162,7 +162,6 @@
 
 <script>
     import { mapState } from 'vuex'
-    import CustomerChart from '../components/CustomerChart'
     import ChartPie from '../components/ChartPie'
     import ChartSexPie from '../components/ChartSexPie'
     import ChartDoubleLine from '../components/ChartDoubleLine'
@@ -170,7 +169,7 @@
     import ChartWordCloud from '../components/ChartWordCloud'
     import ChartLiquid from '../components/ChartLiquid'
     import ChartBarHorizontal from '../components/ChartBarHorizontal'
-    import ChartMap from '../components/ChartMap'
+    import ChartHotMap from '../components/ChartHotMap'
     import { colorMap } from '../script/helper'
 
     export default {
@@ -204,7 +203,7 @@
             })
         },
         components: {
-            ChartSexPie, CustomerChart, ChartMap, ChartPie, ChartBar, ChartDoubleLine, ChartWordCloud, ChartBarHorizontal, ChartLiquid
+            ChartSexPie, ChartHotMap, ChartPie, ChartBar, ChartDoubleLine, ChartWordCloud, ChartBarHorizontal, ChartLiquid
         }
     }
 </script>

@@ -81,11 +81,9 @@ export default new Vuex.Store({
             state.cellFactory = payload.cell_factory.datas
         },
         SET_CUSTOMER_DATA (state, payload) {
-            console.log('a')
             state.customer = payload
         },
         SET_CUSTOMER_DATA_LAST_DAY (state, payload) {
-            console.log('b')
             state.customerLastDay = payload
         },
         SET_MAP_DATA (state, payload) {
@@ -110,13 +108,20 @@ export default new Vuex.Store({
 
             // 获取地图信息
             axios({
-                url: 'bigdata/location/name',
+                url: 'bigdata/location',
                 params: {
                     startDate: that.state.yesterday,
-                    endDate: that.state.yesterday
+                    endDate: that.state.yesterday,
+                    dataType: 0,
+                    areaType: 0
                 }
             }).then(res => {
-                context.commit('SET_MAP_DATA', res)
+                let data = res.loc
+                let result = []
+                data.forEach(item => {
+                    result.push([Number(item.lng), Number(item.lat), 1])
+                })
+                context.commit('SET_MAP_DATA', result)
             })
 
             await axios({
@@ -161,11 +166,9 @@ export default new Vuex.Store({
                 })
                 context.commit('SET_CUSTOMER_DATA_LAST_DAY', customer)
             })
-            console.log('dispatch')
             context.dispatch('handleCustomerRose')
         },
         handleCustomerRose (content) {
-            console.log(3)
             const data1 = this.state.customer
             const data2 = this.state.customerLastDay
             const result = {

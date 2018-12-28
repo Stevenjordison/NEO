@@ -6,7 +6,6 @@
     import echarts from 'echarts/lib/echarts'
     import 'echarts/lib/chart/pie'
     import 'echarts/lib/component/title'
-    import 'echarts/lib/component/visualMap'
     import 'echarts/lib/component/legend'
     import 'echarts/lib/component/tooltip'
 
@@ -46,7 +45,7 @@
                     color: that.color,
                     tooltip: {
                         trigger: 'item',
-                        formatter: '{a} <br/>{b} : {d}%'
+                        formatter: '{b} : {d}%'
                     },
                     series: [
                         {
@@ -55,10 +54,10 @@
                             radius: ['40%', '60%'],
                             center: ['50%', '50%'],
                             data: that.data.map((item) => {
-                                return {name: item.key, value: item.value.toFixed(2)}
+                                return {name: item.key || item.name, value: item.value.toFixed(2)}
                             }),
                             label: {
-                                formatter: '{b}{d}%',
+                                formatter: '{b}：{d}%',
                             },
                             animationType: 'scale',
                             animationEasing: 'elasticOut',
