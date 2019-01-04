@@ -113,7 +113,7 @@ export default new Vuex.Store({
                     startDate: that.state.yesterday,
                     endDate: that.state.yesterday,
                     dataType: 0,
-                    areaType: 0
+                    areaType: 1
                 }
             }).then(res => {
                 let data = res.loc
