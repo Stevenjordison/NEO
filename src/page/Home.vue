@@ -6,7 +6,11 @@
 <template>
     <div class="app-page" id="home-page">
         <div class="header">
-            绿景智慧办公系统4.0
+            <div class="left">{{nowTime}}</div>
+            <div class="center">绿景智慧办公系统4.0</div>
+            <div class="right">
+                <p>系统运行状态 <span>电压: 220V</span><span>电流：32A</span><span>功率系数：0.9</span></p>
+            </div>
         </div>
 
         <el-row class="container">
@@ -76,6 +80,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import DATE from '../script/date'
     import ChartSexPie from '../components/ChartSexPie'
     import ChartGauge from '../components/ChartGauge'
     import ChartDoubleLine from '../components/ChartDoubleLine'
@@ -86,6 +91,8 @@
         name: 'home',
         data () {
             return {
+                interval: null,
+                nowTime: DATE.formatZh(),
                 colorMap: colorMap,
                 carData: [
                     {
@@ -107,24 +114,32 @@
                 power: [
                     { name: '用水量', key: [85, 76, 63, 42, 41, 50, 112, 238, 418, 630, 1075, 1314, 1409, 1386, 1357, 1393, 1478, 1622, 1585, 1541, 1298, 978, 475, 218] },
                     { name: '用电量', key: [46, 44, 31, 26, 24, 24, 57, 116, 219, 420, 768, 984, 996, 1009, 984, 1020, 1099, 1245, 1215, 1172, 980, 728, 307, 134] }
-                ],
+                ]
             }
         },
         components: {
-            ChartSexPie, ChartGauge, ChartDoubleLine,ChartGaugeList
+            ChartSexPie, ChartGauge, ChartDoubleLine, ChartGaugeList
         },
         computed: {
             ...mapState({
                 agebin: state => state.agebin,
-                gender: state => state.gender,
+                gender: state => state.gender
             })
         },
+        mounted () {
+            this.interval = setInterval(() => {
+                this.nowTime = DATE.formatZh()
+            }, 1000)
+        },
         methods: {
-            doRouter(name) {
+            doRouter (name) {
                 this.$router.push({
                     name: name
                 })
             }
+        },
+        destroy () {
+            clearInterval(this.interval)
         }
     }
 </script>

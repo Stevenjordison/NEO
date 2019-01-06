@@ -61,6 +61,14 @@
 
         .content {
             flex: 1;
+            &.total-num{
+                font-family: 'DIN-Medium';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 48px;
+                color: $themeColor;
+            }
             .num {
                 font-family: 'DIN-Medium';
                 font-size: 34px;

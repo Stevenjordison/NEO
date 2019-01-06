@@ -13,12 +13,12 @@
             return {
                 chart: null,
                 demoData: [
-                    { name: '电压', value: 220, unit: 'V', pos: ['16.6%', '25%'], range: [0, 400] },
-                    { name: '电流', value: 32, unit: 'A', pos: ['49.8%', '25%'], range: [0, 60] },
-                    { name: '功率因数', value: 0.9, pos: ['83%', '25%'], range: [0.1, 1.0], splitNum: 9 },
-                    { name: '温度', value: 21, unit: '℃', pos: ['16.6%', '75%'], range: [-10, 60] },
-                    { name: '湿度', value: 75, unit: '%RH', pos: ['49.8%', '75%'], range: [0, 100] },
-                    { name: 'PM2.5', value: 13, unit: 'μg/m³', pos: ['83%', '75%'], range: [0, 100] }
+                    // { name: '电压', value: 220, unit: 'V', pos: ['16.6%', '25%'], range: [0, 400] },
+                    // { name: '电流', value: 32, unit: 'A', pos: ['49.8%', '25%'], range: [0, 60] },
+                    // { name: '功率因数', value: 0.9, pos: ['83%', '25%'], range: [0.1, 1.0], splitNum: 9 },
+                    { name: '温度', value: 21, unit: '℃', pos: ['16.6%', '50%'], range: [-10, 60] },
+                    { name: '湿度', value: 75, unit: '%RH', pos: ['49.8%', '50%'], range: [0, 100] },
+                    { name: 'PM2.5', value: 13, unit: 'μg/m³', pos: ['83%', '50%'], range: [0, 100] }
                 ]
             }
         },

@@ -6,13 +6,29 @@
     background: #000;
     background: url('../assets/images/bg_2.jpg') 0 0/cover no-repeat;
     >.header{
-        width: 100%;
+        display: flex;
         flex: 0 0 60px;
-        margin-bottom: 12px;
+        width: 100%;
         line-height: 60px;
-        font-size: 40px;
-        color: #06dce3;
-        text-align: center;
+
+        .left{
+            flex: 0 0 25%;
+            color: #fff;
+            text-align: right;
+        }
+        .center{
+            flex: 1;
+            font-size: 40px;
+            color: #06dce3;
+            text-align: center;
+        }
+        .right{
+            flex: 0 0 25%;
+            color: #fff;
+            span{
+                margin-left: 10px;
+            }
+        }
     }
     .container{
         height: 100%;

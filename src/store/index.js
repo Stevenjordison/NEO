@@ -45,6 +45,7 @@ export default new Vuex.Store({
             indoor: 0,
             outdoor: 0
         },
+        customerMonthTotal: 0, // 前30天 客流总数
         // 环比增长
         customerRose: {
             new: 0,
@@ -85,6 +86,9 @@ export default new Vuex.Store({
         },
         SET_CUSTOMER_DATA_LAST_DAY (state, payload) {
             state.customerLastDay = payload
+        },
+        SET_CUSTOMER_DATA_LAST_MONTH (state, payload) {
+            state.customerMonthTotal = payload
         },
         SET_MAP_DATA (state, payload) {
             state.mapData = payload
@@ -167,6 +171,16 @@ export default new Vuex.Store({
                 context.commit('SET_CUSTOMER_DATA_LAST_DAY', customer)
             })
             context.dispatch('handleCustomerRose')
+
+            await axios({
+                url: 'bigdata/flow',
+                params: {
+                    startDate: DATE.showAgoDay(31).start,
+                    endDate: DATE.showAgoDay(1).start
+                }
+            }).then(res => {
+                context.commit('SET_CUSTOMER_DATA_LAST_MONTH', res.indoor + res.outdoor)
+            })
         },
         handleCustomerRose (content) {
             const data1 = this.state.customer

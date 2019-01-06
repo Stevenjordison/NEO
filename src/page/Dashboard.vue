@@ -119,6 +119,13 @@
 
             <!--right-->
             <el-col :span="6">
+                <!--上月总客流-->
+                <section class="section-wrap mb" style="flex: 1">
+                    <header class="title">
+                        <h1>上月总客流</h1>
+                    </header>
+                    <div class="content total-num">{{customerMonthTotal}}</div>
+                </section>
                 <!--新老客户分析-->
                 <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
@@ -135,15 +142,6 @@
                     </header>
                     <div class="content">
                         <ChartPie :data="remainTime" :color="colorMap.pie1" :interval=1200></ChartPie>
-                    </div>
-                </section>
-                <!--店内停留时间占比-->
-                <section class="section-wrap mb" style="flex: 1">
-                    <header class="title">
-                        <h1>设备品牌</h1>
-                    </header>
-                    <div class="content">
-                        <ChartPie :data="cellFactory" :color="colorMap.rainbow" :interval=1200></ChartPie>
                     </div>
                 </section>
                 <!--人群偏好-->
@@ -199,6 +197,7 @@
                 segment: state => state.segment,
                 cellFactory: state => state.cellFactory,
 
+                customerMonthTotal: state => state.customerMonthTotal,
                 mapData: state => state.mapData
             })
         },

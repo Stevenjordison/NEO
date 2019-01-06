@@ -3,9 +3,13 @@ export default {
     formatTime (date, format) {
         return formatTime(date, format)
     },
-    // 时间格式化
-    formatZh (date) {
-        return formatZh(date)
+    /**
+     * 时间格式化（中文）
+     * @param date 指定时间
+     * @param obj 是否返回对象
+     */
+    formatZh (date, obj) {
+        return formatZh(date, obj)
     },
     // 获取今天
     showToDay () {
@@ -164,19 +168,22 @@ function formatTime (date, format) {
     return format
 }
 
-function formatZh (string) {
-    string = string.replace(/-/g, '/')
-    let date = new Date(string)
+function formatZh (string, obj) {
+    let date = string ? new Date(string.replace(/-/g, '/')) : new Date()
     let week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-    return {
-        Y: date.getFullYear() + '年',
-        M: date.getMonth() + 1 + '月',
-        D: date.getDate() + '日',
-        W: week[date.getDay()],
-        h: date.getHours() + '时',
-        m: date.getMinutes() + '分',
-        s: date.getSeconds() + '秒'
+    let Y = date.getFullYear()
+    let M = date.getMonth() + 1
+    let D = date.getDate()
+    let W = week[date.getDay()]
+    let h = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
+    let m = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+    let s = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds()
+    if (obj) {
+        return { Y: Y, M: M, D: D, W: W, h: h, m: m, s: s }
+    } else {
+        return `${Y}年${M}月${D}日 ${W} ${h}:${m}:${s}`
     }
+
 }
 
 function showToDay () {
