@@ -54,7 +54,7 @@
                             radius: ['40%', '60%'],
                             center: ['50%', '50%'],
                             data: that.data.map((item) => {
-                                return {name: item.key || item.name, value: item.value.toFixed(2)}
+                                return {name: item.key || item.name, value: (item.value * 100).toFixed(2)}
                             }),
                             label: {
                                 formatter: '{b}：{d}%',

@@ -60,8 +60,8 @@
                         type: 'heatmap',
                         coordinateSystem: 'bmap',
                         data: that.data,
-                        pointSize: 5,
-                        blurSize: 6
+                        pointSize: 25,
+                        blurSize: 15
                     }]
                 })
                 const bmap = that.chart.getModel().getComponent('bmap').getBMap()

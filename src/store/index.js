@@ -123,7 +123,7 @@ export default new Vuex.Store({
                 let data = res.loc
                 let result = []
                 data.forEach(item => {
-                    result.push([Number(item.lng), Number(item.lat), 1])
+                    result.push([Number(item.lng), Number(item.lat), item.count * 150])
                 })
                 context.commit('SET_MAP_DATA', result)
             })

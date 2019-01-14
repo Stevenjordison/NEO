@@ -124,7 +124,10 @@
                     <header class="title">
                         <h1>上月总客流</h1>
                     </header>
-                    <div class="content total-num">{{customerMonthTotal}}</div>
+                    <div class="content total-num">
+                        <span v-if="customerMonthTotal">{{customerMonthTotal}}</span>
+                        <span v-else><i class="el-icon-loading"></i></span>
+                    </div>
                 </section>
                 <!--新老客户分析-->
                 <section class="section-wrap mb" style="flex: 1">
@@ -174,7 +177,8 @@
         name: 'dashboard',
         data () {
             return {
-                colorMap: colorMap
+                colorMap: colorMap,
+                monthDataLoading: true
             }
         },
         computed: {
