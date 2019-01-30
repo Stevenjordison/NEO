@@ -5,11 +5,9 @@ import store from './store/index'
 Vue.use(Router)
 
 let routes = [
-    {
-        path: '/', name: 'home', component (resolve) { require(['./page/Home.vue'], resolve) }
-    }, {
-        path: '/dashboard', name: 'dashboard', component (resolve) { require(['./page/Dashboard.vue'], resolve) }
-    }
+    { path: '/', name: 'home', component (resolve) { require(['./page/Home.vue'], resolve) } },
+    { path: '/dashboard', name: 'dashboard', component (resolve) { require(['./page/Dashboard.vue'], resolve) } },
+    { path: '/power', name: 'power', component (resolve) { require(['./page/Power.vue'], resolve) } }
 ]
 
 const router = new Router({

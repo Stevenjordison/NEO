@@ -3,7 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const url = 'http://192.168.0.10:8080/' // 伟强
+// const url = 'http://192.168.0.10:8080/' // 伟强
+const url = 'http://119.29.18.21:8888/' // 外网
 
 module.exports = {
   dev: {

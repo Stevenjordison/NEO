@@ -4,7 +4,7 @@
 
 <script>
     import echarts from 'echarts/lib/echarts'
-    import { styleJson } from '../script/helper'
+    import { styleJson } from '../../script/helper'
     import 'echarts/extension/bmap/bmap'
     import 'echarts/lib/chart/heatmap'
     import 'echarts/lib/component/visualMap'

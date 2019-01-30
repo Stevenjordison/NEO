@@ -1,0 +1,162 @@
+#power-page {
+    @import 'common/mixin.scss';
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: $main_padding;
+    background: url('../assets/images/bg.jpg') 0 0/cover no-repeat;
+    @font-face {
+        font-family: 'DIN-Medium';
+        src: url("../assets/fonts/DIN-Medium.otf");
+    }
+
+    >.container{
+        flex: 1;
+        > div{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    > footer{
+        flex: 0 0 250px;
+        .section-wrap{
+            height: 100%;
+        }
+    }
+
+    .yellow{
+        color: #ff3;
+    }
+
+    .blue{
+        color: #5fc5f5;
+    }
+
+    .section-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow: hidden;
+        background: url("../assets/images/item_bg.png") 0 0 /100% 100% no-repeat;
+        .title {
+            flex: 0 0 40px;
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 24px;
+            :before {
+                position: absolute;
+                left: 16px;
+                top: 10px;
+                content: '';
+                width: 3px;
+                height: 20px;
+                background: linear-gradient(#4e83ff 0%, #44ebf5 100%);
+            }
+            h1 {
+                display: inline-block;
+                color: $themeColor;
+                font-size: 18px;
+                vertical-align: baseline;
+            }
+            span {
+                color: $color_gray;
+                font-size: 12px;
+            }
+        }
+
+        .content {
+            flex: 1;
+            dl{
+                margin-top: 20px;
+                dt{
+                    font-family: 'DIN-Medium';
+                    width: 100%;
+                    color: #fff;
+                    font-size: 38px;
+                    text-align: center;
+                }
+                dd{
+                    color: #eee;
+                    float: left;
+                    width: 50%;
+                    margin-top: 20px;
+                    text-align: center;
+                    p{
+                        font-size: 28px;
+                    }
+                    span{
+                        font-family: 'DIN-Medium';
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+    }
+
+    .middle{
+        .middle-header{
+            flex: 0 0 80px;
+            margin-bottom: 12px;
+            font-size: 40px;
+            color: #06dce3;
+            text-align: center;
+        }
+        .middle-title{
+            flex: 0 0 230px;
+            margin-bottom: 12px;
+            > div{
+                height: 100%;
+                > .section-wrap{
+                    height: 100%;
+                    .content{
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        .middle-content{
+            flex: 1;
+            margin-bottom: 12px;
+        }
+        .middle-footer{
+            flex: 0 0 233px;
+            > div{
+                height: 100%;
+                > .section-wrap{
+                    height: 100%;
+                }
+            }
+        }
+    }
+    ul.content {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 20px;
+        li {
+            flex: 1;
+        }
+    }
+
+    .comment .el-table .el-table__body .club-name {
+        font-size: 13px;
+    }
+
+    .label-progress {
+        display: flex;
+        width: 100%;
+        margin-bottom: 12px;
+        label {
+            flex: 0 0 40px;
+        }
+        .progress {
+            flex: 1;
+        }
+    }
+
+    .mb {
+        margin-bottom: 12px;
+    }
+}

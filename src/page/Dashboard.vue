@@ -163,14 +163,14 @@
 
 <script>
     import { mapState } from 'vuex'
-    import ChartPie from '../components/ChartPie'
-    import ChartSexPie from '../components/ChartSexPie'
-    import ChartDoubleLine from '../components/ChartDoubleLine'
-    import ChartBar from '../components/ChartBar'
-    import ChartWordCloud from '../components/ChartWordCloud'
-    import ChartLiquid from '../components/ChartLiquid'
-    import ChartBarHorizontal from '../components/ChartBarHorizontal'
-    import ChartHotMap from '../components/ChartHotMap'
+    import ChartPie from '../components/dashboard/ChartPie'
+    import ChartSexPie from '../components/dashboard/ChartSexPie'
+    import ChartDoubleLine from '../components/dashboard/ChartDoubleLine'
+    import ChartBar from '../components/dashboard/ChartBar'
+    import ChartWordCloud from '../components/dashboard/ChartWordCloud'
+    import ChartLiquid from '../components/dashboard/ChartLiquid'
+    import ChartBarHorizontal from '../components/dashboard/ChartBarHorizontal'
+    import ChartHotMap from '../components/dashboard/ChartHotMap'
     import { colorMap } from '../script/helper'
 
     export default {

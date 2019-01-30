@@ -8,24 +8,26 @@
     import 'echarts/lib/component/title'
     import 'echarts/lib/component/legend'
     import 'echarts/lib/component/tooltip'
+    import {isDot} from '../../script/helper'
 
     export default {
-        name: 'ChartDoubleLine',
+        name: 'ChartLineMixBar',
         data () {
             return {
-                chart: null,
+                chart: null
             }
         },
         mounted () {
             this.chart = echarts.init(this.$refs.chart)
             this.chart.showLoading()
-            this.initChart()
         },
         props: {
-            data: Array
+            data: Array,
+            color: String,
+            unit: String
         },
         watch: {
-            data() {
+            data () {
                 this.initChart()
             }
         },
@@ -35,69 +37,88 @@
                 this.chart.hideLoading()
 
                 this.chart.setOption({
-                    color: that.color,
                     textStyle: {
                         color: '#fff'
                     },
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {
-                            type: 'line',
+                            type: 'line'
                         }
                     },
+                    grid: {
+                        top: 30,
+                        bottom: 30,
+                    },
                     xAxis: {
-                        name: '时间(小时)',
                         type: 'category',
-                        boundaryGap: false,
                         axisLine: {
                             lineStyle: {
                                 color: '#fff'
                             }
                         },
-                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: 10
+                            },
+                        },
+                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
                     },
                     yAxis: [{
                         name: that.data[0].name,
                         type: 'value',
+                        splitLine: {  // 网格线
+                            // show: false
+                            lineStyle: {
+                                color: '#4a4a4a',
+                                type: 'dotted'
+                            }
+                        },
                         axisLine: {
                             lineStyle: {
                                 color: '#fff'
                             }
                         },
-                    },{
-                        name: that.data[1].name,
-                        type: 'value',
-                        splitLine: false,
-                        axisLine: {
-                            lineStyle: {
-                                color: '#fff'
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: 10
+                            },
+                            formatter (value, index) {
+                                let result = value
+                                if (value > 10000) {
+                                    result = (value / 10000)
+                                    isDot(value) && (value = value.toFixed(1))
+                                    result += '万'
+                                }
+                                return result
                             }
-                        },
+                        }
                     }],
                     series: [
                         {
                             name: that.data[0].name,
                             type: 'line',
-                            data: that.data[0].key,
-                            color: '#4e83ff',
+                            data: that.data[0].value,
+                            color: that.color,
                             lineStyle: {
-                                color: '#4e83ff'
+                                color: that.color
                             },
                             label: {
-                                formatter: '{b}{d}%',
+                                formatter: '{b}{d}%吨'
                             }
                         }, {
                             name: that.data[1].name,
-                            type: 'line',
-                            data: that.data[1].key,
-                            color: '#ffc508',
-                            yAxisIndex: 1,
-                            lineStyle: {
-                                color: '#ffc508'
-                            },
-                            label: {
-                                formatter: '{b}{d}%',
-                            }
+                            type: 'bar',
+                            stack: 'item',
+                            color: '#0f8891',
+                            data: that.data[1].value,
+                            barCategoryGap: '50%'
+                        }, {
+                            name: that.data[2].name,
+                            type: 'bar',
+                            stack: 'item',
+                            color: '#e1ffff',
+                            data: that.data[2].value
                         }
                     ]
                 })

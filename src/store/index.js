@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../script/_axios.js'
 import DATE from '../script/date'
+import POWER from '../script/power'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,9 @@ export default new Vuex.Store({
             instance: null
         },
 
+        // power
+        powerDate: '2018',
+        power: POWER,
         // flowData
         indoor: 0,
         outdoor: 0,

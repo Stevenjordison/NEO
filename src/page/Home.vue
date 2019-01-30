@@ -18,9 +18,9 @@
                 <!--客户分析-->
                 <section class="section-wrap mb" style="flex: 0 0 30%">
                     <header class="title">
-                        <h1>大数据</h1>
+                        <h1 @click="doRouter('dashboard')">大数据</h1>
                     </header>
-                    <div class="content" @click="doRouter('dashboard')">
+                    <div class="content">
                         <ChartSexPie :agebin="agebin" :gender="gender" :color="colorMap.pie2"></ChartSexPie>
                     </div>
                 </section>
@@ -49,7 +49,7 @@
                 <!--客户分析-->
                 <section class="section-wrap mb" style="flex: 0 0 30%">
                     <header class="title">
-                        <h1>能耗数据</h1>
+                        <h1 @click="doRouter('power')">2018能耗数据</h1>
                     </header>
                     <div class="content">
                         <ChartDoubleLine :data="power"></ChartDoubleLine>
@@ -81,10 +81,10 @@
 <script>
     import { mapState } from 'vuex'
     import DATE from '../script/date'
-    import ChartSexPie from '../components/ChartSexPie'
-    import ChartGauge from '../components/ChartGauge'
-    import ChartDoubleLine from '../components/ChartDoubleLine'
-    import ChartGaugeList from '../components/ChartGaugeList'
+    import ChartSexPie from '../components/dashboard/ChartSexPie'
+    import ChartGauge from '../components/dashboard/ChartGauge'
+    import ChartDoubleLine from '../components/dashboard/ChartDoubleLine'
+    import ChartGaugeList from '../components/dashboard/ChartGaugeList'
     import { colorMap } from '../script/helper'
 
     export default {
@@ -111,10 +111,7 @@
                         total: 60
                     }
                 ],
-                power: [
-                    { name: '用水量', key: [85, 76, 63, 42, 41, 50, 112, 238, 418, 630, 1075, 1314, 1409, 1386, 1357, 1393, 1478, 1622, 1585, 1541, 1298, 978, 475, 218] },
-                    { name: '用电量', key: [46, 44, 31, 26, 24, 24, 57, 116, 219, 420, 768, 984, 996, 1009, 984, 1020, 1099, 1245, 1215, 1172, 980, 728, 307, 134] }
-                ]
+                power: []
             }
         },
         components: {
@@ -123,13 +120,20 @@
         computed: {
             ...mapState({
                 agebin: state => state.agebin,
-                gender: state => state.gender
+                gender: state => state.gender,
+                powerData: state => state.power[state.powerDate]
             })
         },
         mounted () {
+            // 时钟
             this.interval = setInterval(() => {
                 this.nowTime = DATE.formatZh()
             }, 1000)
+
+            const powerData = this.powerData
+            let water = powerData.A.totalWater.map((item, index) => item + powerData.B.totalWater[index])
+            let electric = powerData.A.totalElectric.map((item, index) => item + powerData.B.totalElectric[index])
+            this.power = [{ name: '用水量', value: water }, { name: '用电量', value: electric }]
         },
         methods: {
             doRouter (name) {
