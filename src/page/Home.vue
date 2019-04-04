@@ -28,6 +28,7 @@
                 <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
                         <h1>2018年第四季度报事报修统计</h1>
+                        <i class="icon el-icon-setting" @click="doRouter('powerEdit')"></i>
                     </header>
                     <div class="content text-content">
                         <p><i class="icon icon-service"></i>客诉：61次</p>
@@ -46,16 +47,17 @@
             </el-col>
             <el-col class="center" :span="12"></el-col>
             <el-col class="right" :span="6">
-                <!--客户分析-->
+                <!--2018能耗数据-->
                 <section class="section-wrap mb" style="flex: 0 0 30%">
                     <header class="title">
                         <h1 @click="doRouter('power')">2018能耗数据</h1>
+                        <i class="icon el-icon-setting" @click="doRouter('powerEdit')"></i>
                     </header>
                     <div class="content">
                         <ChartDoubleLine :data="power"></ChartDoubleLine>
                     </div>
                 </section>
-                <!--报事报修-->
+                <!--环境质量-->
                 <section class="section-wrap mb" style="flex: 1">
                     <header class="title">
                         <h1>环境质量</h1>
@@ -70,7 +72,7 @@
                         <h1>实时道路监控</h1>
                     </header>
                     <div class="content img-box" style="padding: 12px;">
-                        <img class="img" src="../assets/images/car.jpg" alt="">
+                        <img class="img" @click="handleHref" src="../assets/images/car.jpg" alt="">
                     </div>
                 </section>
             </el-col>
@@ -137,9 +139,10 @@
         },
         methods: {
             doRouter (name) {
-                this.$router.push({
-                    name: name
-                })
+                this.$router.push({ name: name })
+            },
+            handleHref() {
+                location.href = 'http://10.0.12.239/'
             }
         },
         destroy () {

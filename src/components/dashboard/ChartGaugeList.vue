@@ -12,14 +12,7 @@
         data () {
             return {
                 chart: null,
-                demoData: [
-                    // { name: '电压', value: 220, unit: 'V', pos: ['16.6%', '25%'], range: [0, 400] },
-                    // { name: '电流', value: 32, unit: 'A', pos: ['49.8%', '25%'], range: [0, 60] },
-                    // { name: '功率因数', value: 0.9, pos: ['83%', '25%'], range: [0.1, 1.0], splitNum: 9 },
-                    { name: '温度', value: 21, unit: '℃', pos: ['16.6%', '50%'], range: [-10, 60] },
-                    { name: '湿度', value: 75, unit: '%RH', pos: ['49.8%', '50%'], range: [0, 100] },
-                    { name: 'PM2.5', value: 13, unit: 'μg/m³', pos: ['83%', '50%'], range: [0, 100] }
-                ]
+                dataList: []
             }
         },
         mounted () {
@@ -30,22 +23,16 @@
                 textColor: '#fff',
                 maskColor: 'rgba(255, 255, 255, 0)'
             })
-            this.initChart()
+            this.queryData()
         },
         props: {
             title: String,
-            data: Array,
             color: Array
-        },
-        watch: {
-            data() {
-                this.initChart()
-            }
         },
         methods: {
             initChart () {
                 const that = this
-                const highlight = '#03b7c9';
+                const highlight = '#03b7c9'
                 that.chart.hideLoading()
 
                 that.chart.setOption({
@@ -53,16 +40,16 @@
                     tooltip: {
                         formatter: '{a} <br/>{c} {b}'
                     },
-                    series: (function() {
-                        var result = [];
+                    series: (function () {
+                        var result = []
 
-                        that.demoData.forEach(function(item) {
+                        that.dataList.forEach(function (item) {
                             result.push(
                                 // 外围刻度
                                 {
                                     type: 'gauge',
                                     center: item.pos,
-                                    radius: '33.33%',  // 1行3个
+                                    radius: '50%',
                                     splitNumber: item.splitNum || 10,
                                     min: item.range[0],
                                     max: item.range[1],
@@ -91,7 +78,7 @@
                                         show: true,
                                         length: -4,
                                         lineStyle: {
-                                            color: highlight,
+                                            color: highlight
                                         }
                                     },
                                     axisLabel: {
@@ -116,7 +103,7 @@
                                     name: item.name,
                                     type: 'gauge',
                                     center: item.pos,
-                                    radius: '30.33%',
+                                    radius: '45%',
                                     startAngle: 225,
                                     endAngle: -45,
                                     min: item.range[0],
@@ -131,10 +118,10 @@
                                         }
                                     },
                                     axisTick: {
-                                        show: 0,
+                                        show: 0
                                     },
                                     splitLine: {
-                                        show: 0,
+                                        show: 0
                                     },
                                     axisLabel: {
                                         show: 0
@@ -165,18 +152,41 @@
                                     },
                                     itemStyle: {
                                         normal: {
-                                            color: highlight,
+                                            color: highlight
                                         }
                                     },
                                     data: [{
                                         value: item.value
                                     }]
                                 }
-                            );
-                        });
+                            )
+                        })
 
-                        return result;
+                        return result
                     })()
+                })
+            },
+            queryData () {
+                const that = this
+                that.$axios({
+                    url: 'data/aosien',
+                    method: 'post',
+                    data: {
+                        'SN': 'MjAxOTAzMTU2MDAwMDAwMQ==',
+                        'CMD': 'GetData'
+                    }
+                }).then(res => {
+                    const data = res.Data
+                    console.log('PM2.5设备数据', data)
+                    that.dataList = [
+                        { name: '温度', value: data.Temperature.toFixed(0), unit: '℃', pos: ['16.6%', '50%'], range: [-10, 60] },
+                        { name: '湿度', value: data.Humidity.toFixed(0), unit: '%RH', pos: ['49.8%', '50%'], range: [0, 100] },
+                        { name: 'PM2.5', value: data.PM25.toFixed(0), unit: 'μg/m³', pos: ['83%', '50%'], range: [0, 100] }
+                    ]
+                    that.initChart()
+                }, err => {
+                    console.log(err)
+                    that.$message.error('环境监测数据请求失败')
                 })
             }
         }
